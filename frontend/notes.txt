@@ -1,0 +1,42 @@
+span element is basically like div but its inline-level element
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
+
+em element is used to print the text in italic
+
+to props in <Link> has many functionality
+https://v5.reactrouter.com/web/api/Link
+
+this is how list.map((m) => (...)) works
+https://legacy.reactjs.org/docs/lists-and-keys.html
+
+key attribute is used in React to identify which items in the list are changed, updated, or deleted
+https://www.geeksforgeeks.org/reactjs-keys/
+
+useParams is to get the param of the url
+
+in onChange, event.target.value means we're getting the data inside the input box
+
+Outlet element in react is for rendering the children route of a parent route ("/"), that is also why the page doesnt rerender the entire screen when we change to other children path
+https://kotakode.com/pertanyaan/21032
+https://www.codecademy.com/learn/learn-react-router/modules/learn-react-router/cheatsheet
+
+useOutletContext is for passing data / hooks from 1 route to other route in the same parent route
+https://phantodev.hashnode.dev/using-useoutletcontext-hook-reactjs
+
+Hooks allow function components to have access to state and other React features
+https://www.w3schools.com/react/react_hooks.asp
+
+onChange, to be accurate is to get the data in input for every little change that happens inside it and pass it to some func (e.g. to change the value of email n password)
+then the submit input is to run the func thats in the onSubmit props / attribute
+
+ARIA roles provide semantic meaning to content, allowing screen readers and other tools to present and support interaction with an object in a way that is consistent with user expectations of that type of object. By default, many semantic elements in HTML have a role; for example, <input type="radio"> has the "radio" role. Non-semantic elements in HTML do not have a role; <div> and <span> without added semantics return null.
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles
+
+Screen readers are necessary for blind people, important for partially-sighted users and helpful for people with reading disorders.
+https://www.w3schools.com/accessibility/accessibility_screen_readers.php
+
+useNavigate is like Link element, its to navigate to other page, but its in react
+
+new Headers is to initiate new Headers for requests, this is a must
+
+fetch is to send request to the link/api n try to get the response from it. To use the response, we use .then()
