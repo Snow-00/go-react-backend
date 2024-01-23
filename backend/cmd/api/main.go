@@ -1,6 +1,6 @@
 package main
 
-const PORT = "8000"
+const PORT = "8080"
 
 type Application struct {
 	Domain string

@@ -10,9 +10,9 @@
 /frontend/build
 
 # misc
-.DS_Store
-.env
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/frontend/.DS_Store
+/frontend/.env
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
 
