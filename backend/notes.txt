@@ -1,7 +1,7 @@
 when handling cors middleware, in gin golang the OPTIONS method must use c.AbortWithStatus(204)
 https://stackoverflow.com/questions/29418478/go-gin-framework-cors
 
-database login detail
+database login detail (doesnt needed)
 port = 3306
 name = go_react_movies
 username = go_react_movies
