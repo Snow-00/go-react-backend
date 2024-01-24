@@ -17,3 +17,13 @@ https://docs.docker.com/compose/gettingstarted/
 if u get Docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock
 use this to resolve it
 https://stackoverflow.com/questions/47854463/docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socke
+
+DSN / data source name is the same as 
+"%v:%v@tcp(%v:%v)/%v?parseTime=true",
+ENV.DB_USER, ENV.DB_PASSWORD, ENV.DB_HOST, ENV.DB_PORT, ENV.DB_NAME,
+
+A defer statement defers the execution of a function until the surrounding function returns.
+https://go.dev/tour/flowcontrol/12
+
+COALESCE returns the first argument that is not null. If all arguments are null, the COALESCE function will return null
+https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-coalesce/
