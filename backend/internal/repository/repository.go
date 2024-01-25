@@ -1,7 +1,12 @@
 package repository
 
-import "github.com/Snow-00/go-react-movies-backend/internal/models"
+import (
+	"database/sql"
+
+	"github.com/Snow-00/go-react-movies-backend/internal/models"
+)
 
 type DatabaseRepo interface {
+	Connection() *sql.DB
 	AllMovies() ([]*models.Movie, error)
 }
