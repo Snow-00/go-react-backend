@@ -40,3 +40,5 @@ useNavigate is like Link element, its to navigate to other page, but its in reac
 new Headers is to initiate new Headers for requests, this is a must
 
 fetch is to send request to the link/api n try to get the response from it. To use the response, we use .then()
+
+if u want to use the api in codespace u need to change fetch link into https://curly-computing-machine-7j9pxpgw57fxqp4-8080.app.github.dev/movies

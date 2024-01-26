@@ -27,3 +27,5 @@ https://go.dev/tour/flowcontrol/12
 
 COALESCE returns the first argument that is not null. If all arguments are null, the COALESCE function will return null
 https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-coalesce/
+
+if u want to use the api in codespace u need to change Allow Origin link into https://curly-computing-machine-7j9pxpgw57fxqp4-3000.app.github.dev n set port 8080 into public

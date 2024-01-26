@@ -14,7 +14,8 @@ const Movies = () => {
             headers: headers,
         }
 
-        fetch(`http://localhost:8080/movies`, requestOptions)
+        fetch(`https://curly-computing-machine-7j9pxpgw57fxqp4-8080.app.github.dev/movies`, requestOptions)
+        // fetch(`http://localhost:8080/movies`, requestOptions)
             .then((response) => response.json())
             .then((data) => setMovies(data))
             .catch(err => console.log(err))
