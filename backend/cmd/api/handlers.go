@@ -18,7 +18,7 @@ func (app *Application) Home(c *gin.Context) {
 		Version: "1.0.0",
 	}
 
-	c.JSON(200, payload)
+	c.JSON(http.StatusOK, payload)
 }
 
 func (app *Application) AllMovies(c *gin.Context) {
