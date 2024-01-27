@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { createRoot } from 'react-dom/client'
 import App from './App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 
 const root = createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
+  <Fragment>
     <RouterProvider router={router}/>
-  </React.StrictMode>
+  </Fragment>
 );
