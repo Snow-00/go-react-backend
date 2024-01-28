@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -34,6 +33,16 @@ func (app *Application) AllMovies(c *gin.Context) {
 
 func (app *Application) Authenticate(c *gin.Context) {
 	// read json payload
+	var requestPayload struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	err := c.BindJSON(&requestPayload)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
 
 	// validate user against db
 
@@ -53,6 +62,19 @@ func (app *Application) Authenticate(c *gin.Context) {
 		return
 	}
 
-	log.Println(tokens.Token)
-	c.JSON(http.StatusOK, []byte(tokens.Token))
+	// set refresh cookie
+	var j *Auth
+
+	c.SetSameSite(http.SameSiteStrictMode)
+	c.SetCookie(
+		j.CookieName,
+		tokens.RefreshToken,
+		int(j.RefreshExpiry.Seconds()),
+		j.CookiePath,
+		j.CookieDomain,
+		true,
+		true,
+	)
+
+	c.Writer.Write([]byte(tokens.Token))
 }

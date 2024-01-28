@@ -29,3 +29,13 @@ COALESCE returns the first argument that is not null. If all arguments are null,
 https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-coalesce/
 
 if u want to use the api in codespace u need to change Allow Origin link into https://curly-computing-machine-7j9pxpgw57fxqp4-3000.app.github.dev n set port 8080 into public
+
+w.Write([]byte(...)) = c.Writer.Write([]byte(...))
+
+max-age and expires in cookie actually the same, max-age is the replacement for expires, but for some old browser like internet explorer doesn't support max-age
+https://mrcoles.com/blog/cookies-max-age-vs-expires/#:~:text=Expires%20sets%20an%20expiry%20date,this%2C%20it's%20no%20longer%202009)
+
+in dev (localhost), secure will be automatically set false, but once in prod, it will be true when u set it true
+
+diff between BindJSON and ShouldBindJSON is BindJSON already setup the error handling when there is an error, but in ShouldBindJSON we must handle the error ourselves
+https://gin-gonic.com/docs/examples/binding-and-validation/
