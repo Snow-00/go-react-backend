@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -45,6 +46,11 @@ func (app *Application) Authenticate(c *gin.Context) {
 	}
 
 	// validate user against db
+	user, err := app.DB.GetUserByEmail(requestPayload.Email)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, errors.New("invalid credentials"))
+		return
+	}
 
 	//check password
 
