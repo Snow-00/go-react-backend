@@ -29,9 +29,9 @@ type TokenPairs struct {
 	RefreshToken string `json:"refresh_token"`
 }
 
-// type Claims struct {
-// 	jwt.RegisteredClaims
-// }
+type Claims struct {
+	jwt.RegisteredClaims
+}
 
 func (j *Auth) GenerateTokenPair(user *JWTUser) (TokenPairs, error) {
 	// create token

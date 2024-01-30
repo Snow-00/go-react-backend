@@ -25,3 +25,16 @@ func (app *Application) ErrorJSON(c *gin.Context, err error, status ...int) {
 
 	c.JSON(statusCode, payload)
 }
+
+func (j *Auth) RefreshCookie(c *gin.Context, refreshToken string) {
+	c.SetSameSite(http.SameSiteStrictMode)
+	c.SetCookie(
+		j.CookieName,
+		refreshToken,
+		int(j.RefreshExpiry.Seconds()),
+		j.CookiePath,
+		j.CookieDomain,
+		true,
+		true,
+	)
+}
