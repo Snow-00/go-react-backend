@@ -39,3 +39,6 @@ in dev (localhost), secure will be automatically set false, but once in prod, it
 
 diff between BindJSON and ShouldBindJSON is BindJSON already setup the error handling when there is an error, but in ShouldBindJSON we must handle the error ourselves
 https://gin-gonic.com/docs/examples/binding-and-validation/
+
+size RequestSizeLimit is for limiting the size of the request, like MaxBytesReader
+https://pkg.go.dev/github.com/gin-contrib/size

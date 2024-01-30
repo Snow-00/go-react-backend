@@ -53,5 +53,3 @@ The JSON.stringify() static method converts a JavaScript value (object) to a JSO
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
 
 the safest place to store jwt token is as a variable in js / react, but the refresh token is in the cookie to make it easy when refreshing the token
-
-this is a test

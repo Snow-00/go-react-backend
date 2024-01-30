@@ -41,21 +41,21 @@ func (app *Application) Authenticate(c *gin.Context) {
 
 	err := c.BindJSON(&requestPayload)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": err.Error()})
+		app.ErrorJSON(c, err)
 		return
 	}
 
 	// validate user against db (doesnt know the user)
 	user, err := app.DB.GetUserByEmail(requestPayload.Email)
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": true, "message": errors.New("invalid credentials").Error()})
+		app.ErrorJSON(c, errors.New("invalid credentials"), http.StatusForbidden)
 		return
 	}
 
 	//check password
 	valid, err := user.PasswordMatches(requestPayload.Password)
 	if err != nil || !valid {
-		c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": errors.New("invalid credentials").Error()})
+		app.ErrorJSON(c, errors.New("invalid credentials"), http.StatusForbidden)
 		return
 	}
 
@@ -69,7 +69,7 @@ func (app *Application) Authenticate(c *gin.Context) {
 	// generate tokens
 	tokens, err := app.Auth.GenerateTokenPair(&u)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": err.Error()})
+		app.ErrorJSON(c, err)
 		return
 	}
 
