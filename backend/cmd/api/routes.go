@@ -11,7 +11,7 @@ func (app *Application) Routes() *gin.Engine {
 	r.Use(app.EnableCORS())
 
 	r.GET("/", app.Home)
-	r.GET("/authenticate", app.Authenticate)
+	r.POST("/authenticate", app.Authenticate)
 	r.GET("/movies", app.AllMovies)
 
 	return r

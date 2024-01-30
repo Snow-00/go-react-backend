@@ -42,3 +42,14 @@ new Headers is to initiate new Headers for requests, this is a must
 fetch is to send request to the link/api n try to get the response from it. To use the response, we use .then()
 
 if u want to use the api in codespace u need to change fetch link into https://curly-computing-machine-7j9pxpgw57fxqp4-8080.app.github.dev/movies
+
+preventDefault is called on the event when submitting the form to prevent a browser reload/refresh
+https://www.robinwieruch.de/react-preventdefault/
+
+credentials: 'include' => Always send user credentials (cookies, basic http auth, etc..), even for cross-origin calls
+https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
+
+The JSON.stringify() static method converts a JavaScript value (object) to a JSON string
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+
+the safest place to store jwt token is as a variable in js / react, but the refresh token is in the cookie to make it easy when refreshing the token

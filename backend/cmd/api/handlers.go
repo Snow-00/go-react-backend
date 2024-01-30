@@ -41,30 +41,35 @@ func (app *Application) Authenticate(c *gin.Context) {
 
 	err := c.BindJSON(&requestPayload)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": err.Error()})
 		return
 	}
 
-	// validate user against db
+	// validate user against db (doesnt know the user)
 	user, err := app.DB.GetUserByEmail(requestPayload.Email)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, errors.New("invalid credentials"))
+		c.JSON(http.StatusForbidden, gin.H{"error": true, "message": errors.New("invalid credentials").Error()})
 		return
 	}
 
 	//check password
+	valid, err := user.PasswordMatches(requestPayload.Password)
+	if err != nil || !valid {
+		c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": errors.New("invalid credentials").Error()})
+		return
+	}
 
 	// create jwt user
 	u := JWTUser{
-		ID:        1,
-		FirstName: "Admin",
-		LastName:  "User",
+		ID:        user.ID,
+		FirstName: user.FirstName,
+		LastName:  user.LastName,
 	}
 
 	// generate tokens
 	tokens, err := app.Auth.GenerateTokenPair(&u)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": err.Error()})
 		return
 	}
 
@@ -82,5 +87,5 @@ func (app *Application) Authenticate(c *gin.Context) {
 		true,
 	)
 
-	c.Writer.Write([]byte(tokens.Token))
+	c.JSON(http.StatusAccepted, tokens)
 }
