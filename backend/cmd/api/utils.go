@@ -38,3 +38,16 @@ func (j *Auth) RefreshCookie(c *gin.Context, refreshToken string) {
 		true,
 	)
 }
+
+func (j *Auth) ExpiredRefreshCookie(c *gin.Context) {
+	c.SetSameSite(http.SameSiteStrictMode)
+	c.SetCookie(
+		j.CookieName,
+		"",
+		-1,
+		j.CookiePath,
+		j.CookieDomain,
+		true,
+		true,
+	)
+}

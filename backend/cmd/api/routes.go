@@ -17,6 +17,7 @@ func (app *Application) Routes() *gin.Engine {
 	r.GET("/", app.Home)
 	r.POST("/authenticate", app.Authenticate)
 	r.GET("/refresh", app.RefreshToken)
+	r.GET("/logout", app.Logout)
 	r.GET("/movies", app.AllMovies)
 
 	return r

@@ -10,7 +10,15 @@ function App() {
   const navigate = useNavigate()
 
   const logout = () => {
-    setJwtToken("")
+    const requestOptions = {
+      method: "GET",
+      credentials: "include",
+    }
+
+    // here we dont need .then becos we just want to delete the cookie
+    fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/logout`, requestOptions)
+      .catch(error => console.log("error logging out", error))
+      .finally(() => setJwtToken("")) 
     navigate("/login")
   }
 

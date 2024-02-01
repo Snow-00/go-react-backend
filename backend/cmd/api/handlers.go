@@ -50,14 +50,14 @@ func (app *Application) Authenticate(c *gin.Context) {
 	// validate user against db (doesnt know the user)
 	user, err := app.DB.GetUserByEmail(requestPayload.Email)
 	if err != nil {
-		app.ErrorJSON(c, errors.New("invalid credentials"), http.StatusForbidden)
+		app.ErrorJSON(c, errors.New("invalid credentials (email)"), http.StatusForbidden)
 		return
 	}
 
 	//check password
 	valid, err := user.PasswordMatches(requestPayload.Password)
 	if err != nil || !valid {
-		app.ErrorJSON(c, errors.New("invalid credentials"), http.StatusForbidden)
+		app.ErrorJSON(c, errors.New("invalid credentials (pass)"), http.StatusForbidden)
 		return
 	}
 
@@ -127,4 +127,9 @@ func (app *Application) RefreshToken(c *gin.Context) {
 			c.JSON(http.StatusOK, tokenPairs)
 		}
 	}
+}
+
+func (app *Application) Logout(c *gin.Context) {
+	app.Auth.ExpiredRefreshCookie(c)
+	c.Writer.WriteHeader(http.StatusAccepted)
 }

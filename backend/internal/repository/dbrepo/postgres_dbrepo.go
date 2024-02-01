@@ -69,7 +69,7 @@ func (m *PostgresDBRepo) GetUserByEmail(email string) (*models.User, error) {
 				password,
 				created_at,
 				updated_at
-			FROM 'users' WHERE 'email' = $1`
+			FROM users WHERE email = $1`
 
 	var user models.User
 	row := m.DB.QueryRowContext(ctx, query, email)
@@ -103,7 +103,7 @@ func (m *PostgresDBRepo) GetUserByID(id int) (*models.User, error) {
 				password,
 				created_at,
 				updated_at
-			FROM 'users' WHERE 'id' = $1`
+			FROM users WHERE id = $1`
 	
 	var user models.User
 	row := m.DB.QueryRowContext(ctx, query, id)
