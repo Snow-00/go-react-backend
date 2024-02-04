@@ -1,3 +1,8 @@
+Use var if you want function-scoped variables that can be hoisted.
+Use let if you want block-scoped variables that can be reassigned.
+Use const if you want block-scoped variables that are constant and cannot be reassigned.
+https://www.linkedin.com/pulse/var-vs-let-const-easiest-explanation-ever-asit-rohan-dass#:~:text=Use%20var%20if%20you%20want,constant%20and%20cannot%20be%20reassigned.
+
 span element is basically like div but its inline-level element
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 
@@ -55,3 +60,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 the safest place to store jwt token is as a variable in js / react, but the refresh token is in the cookie to make it easy when refreshing the token
 
 .finally() means this will be exec no matter what at the end
+
+The setInterval() method executes a function repeatedly at a specified interval.
+To avoid memory leaks, its important to use clearInterval in a cleanup func (see the reference)
+https://www.geeksforgeeks.org/how-to-use-setinterval-method-inside-react-components/
+
+useCallback is used to cache the func so we can use the func without rerender it again, like increment(?)
+https://www.w3schools.com/react/react_usecallback.asp
+https://legacy.reactjs.org/docs/hooks-reference.html
