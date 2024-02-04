@@ -42,3 +42,5 @@ https://gin-gonic.com/docs/examples/binding-and-validation/
 
 size RequestSizeLimit is for limiting the size of the request, like MaxBytesReader
 https://pkg.go.dev/github.com/gin-contrib/size
+
+dont use the cookie naming convention in udemy, it doesnt work (__Host-refresh_token)

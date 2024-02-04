@@ -111,9 +111,9 @@ func (app *Application) RefreshToken(c *gin.Context) {
 			}
 
 			u := JWTUser{
-				ID: userID,
+				ID:        userID,
 				FirstName: user.FirstName,
-				LastName: user.LastName,
+				LastName:  user.LastName,
 			}
 
 			tokenPairs, err := app.Auth.GenerateTokenPair(&u)
