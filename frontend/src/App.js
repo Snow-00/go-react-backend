@@ -23,7 +23,7 @@ function App() {
       .catch(error => console.log("error logging out", error))
       .finally(() => {
         setJwtToken("")
-        toggleRefresh(false)
+        // toggleRefresh(false)
       }) 
     navigate("/login")
   }
@@ -47,7 +47,11 @@ function App() {
   }, [tickInterval])
 
   useEffect(() => {
+    console.log("use effect run")
+
     if (jwtToken === "") {
+      console.log("the jwt token:", jwtToken)
+      
       const requestOptions = {
         method: "GET",
         credentials: "include",
@@ -59,7 +63,7 @@ function App() {
         .then(data => {
           if (data.access_token) {
             setJwtToken(data.access_token)
-            toggleRefresh(true)
+            // toggleRefresh(true)
           }
         })
         .catch(error => console.log("user not logged in", error))

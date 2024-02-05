@@ -65,6 +65,8 @@ The setInterval() method executes a function repeatedly at a specified interval.
 To avoid memory leaks, its important to use clearInterval in a cleanup func (see the reference)
 https://www.geeksforgeeks.org/how-to-use-setinterval-method-inside-react-components/
 
-useCallback is used to cache the func so we can use the func without rerender it again, like increment(?)
+useCallback is used to cache the func so we can use the func without rerender it again, like increment(?). additional info
+useCallback is used to prevent rerender the components every time the parent func does, read this
 https://www.w3schools.com/react/react_usecallback.asp
 https://legacy.reactjs.org/docs/hooks-reference.html
+https://refine.dev/blog/react-usecallback-guide/#what-is-react-usecallback-
