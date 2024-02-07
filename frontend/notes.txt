@@ -70,3 +70,9 @@ useCallback is used to prevent rerender the components every time the parent fun
 https://www.w3schools.com/react/react_usecallback.asp
 https://legacy.reactjs.org/docs/hooks-reference.html
 https://refine.dev/blog/react-usecallback-guide/#what-is-react-usecallback-
+
+to check if the user still on, its better to use token rather than useIdleTimer, becoz useIdleTimer only checks whether the user cursor / page moving or not and that can be manipulate using extension
+
+when we refresh the page, react will rerender everything from the func / component to state n variables, except for the ones in useCallback
+
+clearInterval menerima input id dari hasil setInterval

@@ -28,23 +28,29 @@ function App() {
     navigate("/login")
   }
 
-  const toggleRefresh = useCallback(status => {
-    console.log("clicked")
+  // const toggleRefresh = useCallback(status => {
+  //   console.log("clicked")
 
-    if (status) {
-      let i = setInterval(() => {
-        console.log("this will run every sec")
-      }, 1000)
-      setTickInterval(i)
+  //   if (status) {
+  //     let i = setInterval(() => {
+  //       console.log("this will run every sec")
+  //     }, 1000)
+  //     setTickInterval(i)
 
-      console.log("setting tick interval to", i)
-    } else {
-      console.log("turning off tickInterval", tickInterval)
+  //     console.log("setting tick interval to", i)
+  //   } else {
+  //     console.log("turning off tickInterval", tickInterval)
       
-      setTickInterval(null)
-      clearInterval(tickInterval)
+  //     setTickInterval(null)
+  //     clearInterval(tickInterval)
+  //   }
+  // }, [tickInterval])
+
+  const toggleRefresh = useCallback(() => {
+    if (jwtToken !== "") {
+      setInterval
     }
-  }, [tickInterval])
+  })
 
   useEffect(() => {
     console.log("use effect run")
@@ -68,7 +74,8 @@ function App() {
         })
         .catch(error => console.log("user not logged in", error))
     }
-  }, [jwtToken, toggleRefresh])
+  // }, [jwtToken, refreshToggle]
+  }, [jwtToken])
 
   return (
     <div className="container">
