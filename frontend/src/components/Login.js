@@ -42,7 +42,6 @@ const Login = () => {
                     setJwtToken(data.access_token)
                     setAlertClassName("d-none")
                     setAlertMessage("")
-                    // toggleRefresh(true)
                     navigate("/")
                 }
                 // console.log(data)

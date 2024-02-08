@@ -23,7 +23,6 @@ function App() {
       .catch(error => console.log("error logging out", error))
       .finally(() => {
         setJwtToken("")
-        // toggleRefresh(false)
       }) 
     navigate("/login")
   }
@@ -47,35 +46,30 @@ function App() {
   // }, [tickInterval])
 
   const toggleRefresh = useCallback(() => {
-    if (jwtToken !== "") {
-      setInterval
+    const requestOptions = {
+      method: "GET",
+      credentials: "include",
     }
-  })
+
+    // fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/refresh`, requestOptions)
+    fetch(`http://localhost:8080/refresh`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        if (data.access_token) {
+          setJwtToken(data.access_token)
+        }
+      })
+      .catch(error => {
+        if (error.message !== "Unexpected end of JSON input") {
+          console.log(error)
+        }
+      })
+  }, [])
 
   useEffect(() => {
-    console.log("use effect run")
-
-    if (jwtToken === "") {
-      console.log("the jwt token:", jwtToken)
-      
-      const requestOptions = {
-        method: "GET",
-        credentials: "include",
-      }
-
-      // fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/refresh`, requestOptions)
-      fetch(`http://localhost:8080/refresh`, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          if (data.access_token) {
-            setJwtToken(data.access_token)
-            // toggleRefresh(true)
-          }
-        })
-        .catch(error => console.log("user not logged in", error))
-    }
-  // }, [jwtToken, refreshToggle]
-  }, [jwtToken])
+    console.log("useEffect run")
+    toggleRefresh()
+  }, [toggleRefresh])
 
   return (
     <div className="container">

@@ -76,3 +76,8 @@ to check if the user still on, its better to use token rather than useIdleTimer,
 when we refresh the page, react will rerender everything from the func / component to state n variables, except for the ones in useCallback
 
 clearInterval menerima input id dari hasil setInterval
+
+in useEffect we can give return () => {}; so that the return func will only be run after the component is unmounted
+
+using empty catch block is not a really good idea, but if ur sure then its ok
+https://stackoverflow.com/questions/1234343/why-are-empty-catch-blocks-a-bad-idea
