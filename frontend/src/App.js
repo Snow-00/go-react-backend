@@ -90,7 +90,7 @@ function App() {
         <div className="col-md-10">
           <Alert message={alertMessage} className={alertClassName} />
           <Outlet context={{
-            // jwtToken,  -> if doesnt need to pass the jwtToken, this isnt needed here
+            jwtToken,  
             setJwtToken,
             setAlertClassName,
             setAlertMessage,
