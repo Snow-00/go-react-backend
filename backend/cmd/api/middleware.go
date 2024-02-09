@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 func (app *Application) EnableCORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -11,7 +15,19 @@ func (app *Application) EnableCORS() gin.HandlerFunc {
 		c.Header("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, X-CSRF-Token, Authorization")
 
 		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(204)
+			c.AbortWithStatus(http.StatusNoContent)
+			return
+		}
+
+		c.Next()
+	}
+}
+
+func (app *Application) AuthRequired() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		_, _, err := app.Auth.GetTokenAndVerify(c)
+		if err != nil {
+			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
 

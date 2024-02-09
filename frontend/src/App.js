@@ -27,24 +27,6 @@ function App() {
     navigate("/login")
   }
 
-  // const toggleRefresh = useCallback(status => {
-  //   console.log("clicked")
-
-  //   if (status) {
-  //     let i = setInterval(() => {
-  //       console.log("this will run every sec")
-  //     }, 1000)
-  //     setTickInterval(i)
-
-  //     console.log("setting tick interval to", i)
-  //   } else {
-  //     console.log("turning off tickInterval", tickInterval)
-      
-  //     setTickInterval(null)
-  //     clearInterval(tickInterval)
-  //   }
-  // }, [tickInterval])
-
   const toggleRefresh = useCallback(() => {
     const requestOptions = {
       method: "GET",

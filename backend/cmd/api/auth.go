@@ -1,9 +1,12 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"strings"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -79,4 +82,49 @@ func (j *Auth) GenerateTokenPair(user *JWTUser) (TokenPairs, error) {
 
 	// return TokenPairs
 	return tokenPairs, nil
+}
+
+func (j *Auth) GetTokenAndVerify(c *gin.Context) (string, *Claims, error) {
+	// get auth header
+	authHeader := c.Request.Header.Get("Authorization")
+
+	// sanity check
+	if authHeader == "" {
+		return "", nil, errors.New("no auth header")
+	}
+
+	// split header on spaces
+	headerParts := strings.Split(authHeader, " ")
+	if len(headerParts) != 2 {
+		return "", nil, errors.New("invalid auth header")
+	}
+
+	// check if its Bearer
+	if headerParts[0] != "Bearer" {
+		return "", nil, errors.New("invalid auth header")
+	}
+
+	token := headerParts[1]
+	claims := &Claims{}
+
+	//parse the token
+	_, err := jwt.ParseWithClaims(token, claims, func(t *jwt.Token) (interface{}, error) {
+		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", t.Header["alg"])
+		}
+		return []byte(j.Secret), nil
+	})
+
+	if err != nil {
+		if errors.Is(err, jwt.ErrTokenExpired) {
+			return "", nil, errors.New("expired token")
+		}
+		return "", nil, err
+	}
+
+	if claims.Issuer != j.Issuer {
+		return "", nil, errors.New("invalid issuer")
+	}
+
+	return token, claims, nil
 }

@@ -44,3 +44,15 @@ size RequestSizeLimit is for limiting the size of the request, like MaxBytesRead
 https://pkg.go.dev/github.com/gin-contrib/size
 
 dont use the cookie naming convention in udemy, it doesnt work (__Host-refresh_token)
+
+its better to use c.Request.Header.Get() than c.GetHeader, becoz c.GetHeader is case sensitive and its not uncommon that there r different casing for Headers
+https://github.com/gin-gonic/gin/issues/1079
+
+go playground for testing split string
+https://go.dev/play/p/nxjWA887Sq-
+
+HMAC is the type for HS256
+https://auth0.com/blog/rs256-vs-hs256-whats-the-difference/#:~:text=HS256%20(HMAC%20with%20SHA%2D256,the%20signature%20and%20validating%20it.
+
+1 of good clean code principles is that 1 method / func responsibles for 1 action / functionality. reference clean code in golang
+https://levelup.gitconnected.com/10-essential-tips-for-writing-clean-code-in-golang-2d78245a6f40
