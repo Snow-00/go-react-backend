@@ -14,22 +14,22 @@ const ManageCatalog = () => {
 
         const headers = new Headers()
         headers.append("Content-Type", "application/json")
+        headers.append("Authorization", "Bearer " + jwtToken)
 
         const requestOptions = {
             method: "GET",
             headers: headers,
         }
 
-        // fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/movies`, requestOptions)
-        fetch(`http://localhost:8080/movies`, requestOptions)
+        fetch(`/admin/movies`, requestOptions)
             .then(response => response.json())
             .then(data => setMovies(data))
             .catch(error => console.log(error))
-    }, [jwtToken, navigate])
+    }, [jwtToken])
 
     return (
         <div>
-            <h2>Movies</h2>
+            <h2>Manage Catalog</h2>
             <hr />
 
             <table className="table table-striped table-hover">
@@ -45,7 +45,7 @@ const ManageCatalog = () => {
                     {movies.map((m) => (
                         <tr key={m.id}>
                             <td>
-                                <Link to={`/movies/${m.id}`}>
+                                <Link to={`/admin/movies/${m.id}`}>
                                     {m.title}
                                 </Link>
                             </td>

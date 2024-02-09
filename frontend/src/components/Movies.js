@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Movies = () => {
     const [movies, setMovies] = useState([])
 
-    // for now this is for fake calling backend
     useEffect(() => {
         const headers = new Headers()
         headers.append("Content-Type", "application/json")
@@ -14,8 +13,7 @@ const Movies = () => {
             headers: headers,
         }
 
-        // fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/movies`, requestOptions)
-        fetch(`http://localhost:8080/movies`, requestOptions)
+        fetch(`/movies`, requestOptions)
             .then((response) => response.json())
             .then((data) => setMovies(data))
             .catch(err => console.log(err))

@@ -31,8 +31,7 @@ const Login = () => {
             body: JSON.stringify(payload),
         }
 
-        // fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/authenticate`, requestOptions)
-        fetch(`http://localhost:8080/authenticate`, requestOptions)
+        fetch(`/authenticate`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {

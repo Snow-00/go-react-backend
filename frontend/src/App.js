@@ -18,8 +18,7 @@ function App() {
     }
 
     // here we dont need .then becos we just want to delete the cookie
-    // fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/logout`, requestOptions)
-    fetch(`http://localhost:8080/logout`, requestOptions)
+    fetch(`/logout`, requestOptions)
       .catch(error => console.log("error logging out", error))
       .finally(() => {
         setJwtToken("")
@@ -33,8 +32,7 @@ function App() {
       credentials: "include",
     }
 
-    // fetch(`https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev/refresh`, requestOptions)
-    fetch(`http://localhost:8080/refresh`, requestOptions)
+    fetch(`/refresh`, requestOptions)
       .then(response => response.json())
       .then(data => {
         if (data.access_token) {

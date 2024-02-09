@@ -82,6 +82,16 @@ in useEffect we can give return () => {}; so that the return func will only be r
 using empty catch block is not a really good idea, but if ur sure then its ok
 https://stackoverflow.com/questions/1234343/why-are-empty-catch-blocks-a-bad-idea
 
+to use proxy just simply add this in package.json
+"proxy": "http://localhost:8080",
+OR
+"proxy": "https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev"
+https://blog.logrocket.com/why-you-should-use-proxy-server-create-react-app/
+
+if theres an error in proxy try this solution first
+https://stackoverflow.com/questions/48291950/proxy-not-working-for-react-and-node
+
+
 JUST FOR LEARNING
 // const toggleRefresh = useCallback(status => {
 //   console.log("clicked")

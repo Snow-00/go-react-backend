@@ -135,5 +135,11 @@ func (app *Application) Logout(c *gin.Context) {
 }
 
 func (app *Application) MovieCatalog(c *gin.Context) {
-	
+	movies, err := app.DB.AllMovies()
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, movies)
 }
