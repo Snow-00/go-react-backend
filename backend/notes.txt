@@ -56,3 +56,7 @@ https://auth0.com/blog/rs256-vs-hs256-whats-the-difference/#:~:text=HS256%20(HMA
 
 1 of good clean code principles is that 1 method / func responsibles for 1 action / functionality. reference clean code in golang
 https://levelup.gitconnected.com/10-essential-tips-for-writing-clean-code-in-golang-2d78245a6f40
+
+there r 2 formats of grouping routes, see these two docs
+https://gin-gonic.com/zh-tw/docs/examples/using-middleware/
+https://gin-gonic.com/docs/examples/grouping-routes/

@@ -133,3 +133,7 @@ func (app *Application) Logout(c *gin.Context) {
 	app.Auth.ExpiredRefreshCookie(c)
 	c.Writer.WriteHeader(http.StatusAccepted)
 }
+
+func (app *Application) MovieCatalog(c *gin.Context) {
+	
+}
