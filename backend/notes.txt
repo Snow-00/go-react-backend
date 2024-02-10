@@ -60,3 +60,5 @@ https://levelup.gitconnected.com/10-essential-tips-for-writing-clean-code-in-gol
 there r 2 formats of grouping routes, see these two docs
 https://gin-gonic.com/zh-tw/docs/examples/using-middleware/
 https://gin-gonic.com/docs/examples/grouping-routes/
+
+in codespace vs code cookie domain must be set to the IP address, localhost doesn't work
