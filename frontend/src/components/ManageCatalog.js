@@ -4,7 +4,12 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom";
 const ManageCatalog = () => {
     const [movies, setMovies] = useState([])
     const { jwtToken } = useOutletContext()
+    const { toggleRefresh } = useOutletContext()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        toggleRefresh()
+    }, [toggleRefresh])
 
     useEffect(() => {
         if (jwtToken === "") {

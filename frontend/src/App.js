@@ -7,8 +7,6 @@ function App() {
   const [alertMessage, setAlertMessage] = useState("")
   const [alertClassName, setAlertClassName] = useState("d-none")  // display property of bootstrap
 
-  const [tickInterval, setTickInterval] = useState()
-
   const navigate = useNavigate()
 
   const logout = () => {
