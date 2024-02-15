@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 const ManageCatalog = () => {
     const [movies, setMovies] = useState([])
     const { jwtToken } = useOutletContext()
+    const { setJwtToken } = useOutletContext()
     const { toggleRefresh } = useOutletContext()
     const navigate = useNavigate()
 
-    useEffect(() => {
-        toggleRefresh()
-    }, [toggleRefresh])
-
-    useEffect(() => {
-        if (jwtToken === "") {
-            navigate("/login")
-            return
+    const checkJwt = useCallback(async () => {
+        try {
+            let token = await toggleRefresh()
+            setJwtToken(token)
         }
+        catch(error) {
+            setJwtToken("")
+            navigate("/login")
+        }
+    }, [])
+    
+    useEffect(() => {
+        console.log("fetch run")
 
         const headers = new Headers()
         headers.append("Content-Type", "application/json")
@@ -30,7 +35,7 @@ const ManageCatalog = () => {
             .then(response => response.json())
             .then(data => setMovies(data))
             .catch(error => console.log(error))
-    }, [jwtToken])
+    }, [])
 
     return (
         <div>

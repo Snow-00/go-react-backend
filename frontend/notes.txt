@@ -91,6 +91,12 @@ https://blog.logrocket.com/why-you-should-use-proxy-server-create-react-app/
 if theres an error in proxy try this solution first
 https://stackoverflow.com/questions/48291950/proxy-not-working-for-react-and-node
 
+in react the default for running func is synchronous (not sequential), so if u want to make it asynchronous use Promise, async, await
+https://www.youtube.com/watch?v=9j1dZwFEJ-c
+https://www.youtube.com/watch?v=li7FzDHYZpc
+
+
+=============================================================================================================
 
 JUST FOR LEARNING
 // const toggleRefresh = useCallback(status => {
