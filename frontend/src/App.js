@@ -24,32 +24,36 @@ function App() {
     navigate("/login")
   }
 
-  const toggleRefresh = useCallback(new Promise((resolve, reject) => {
-    const requestOptions = {
-      method: "GET",
-      credentials: "include",
-    }
+  const toggleRefresh = useCallback(() => {
+    return new Promise((resolve, reject) => {
+      const requestOptions = {
+        method: "GET",
+        credentials: "include",
+      }
 
-    fetch(`/refresh`, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        if (data.error) {
-          reject(data.message)
-          return
-        }
-        resolve(data.access_token)
+      fetch(`/refresh`, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            reject(data.message)
+            return
+          }
+          resolve(data.access_token)
+        })
+        .catch(error => {
+          // if (error.message !== "Unexpected end of JSON input") {
+          //   console.log(error)
+          // }
+          reject(error)
+        })
       })
-      .catch(error => {
-        // if (error.message !== "Unexpected end of JSON input") {
-        //   console.log(error)
-        // }
-        reject(error)
-      })
-  }), [])
+  }, [])
 
   useEffect(() => {
     console.log("useEffect run")
     toggleRefresh()
+      .then(token => setJwtToken(token))
+      .catch(error => console.log(error))
   }, [toggleRefresh])
 
   return (

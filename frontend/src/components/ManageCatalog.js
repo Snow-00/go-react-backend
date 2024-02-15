@@ -8,23 +8,10 @@ const ManageCatalog = () => {
     const { toggleRefresh } = useOutletContext()
     const navigate = useNavigate()
 
-    const checkJwt = useCallback(async () => {
-        try {
-            let token = await toggleRefresh()
-            setJwtToken(token)
-        }
-        catch(error) {
-            setJwtToken("")
-            navigate("/login")
-        }
-    }, [])
-    
-    useEffect(() => {
-        console.log("fetch run")
-
+    const fetchCatalog = useCallback((token) => {
         const headers = new Headers()
         headers.append("Content-Type", "application/json")
-        headers.append("Authorization", "Bearer " + jwtToken)
+        headers.append("Authorization", "Bearer " + token)
 
         const requestOptions = {
             method: "GET",
@@ -36,6 +23,22 @@ const ManageCatalog = () => {
             .then(data => setMovies(data))
             .catch(error => console.log(error))
     }, [])
+
+    const checkJwt = useCallback(async () => {
+        try {
+            let token = await toggleRefresh()
+            setJwtToken(token, fetchCatalog(token))
+        }
+        catch(error) {
+            console.log(error)
+            setJwtToken("")
+            navigate("/login")
+        }
+    }, [toggleRefresh])
+    
+    useEffect(() => {
+        checkJwt()
+    }, [checkJwt])
 
     return (
         <div>
