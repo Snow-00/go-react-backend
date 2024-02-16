@@ -20,27 +20,20 @@ const ManageCatalog = () => {
 
         try {
             let response = await fetch(`/admin/movies`, requestOptions)
-            if (response.status !== 401) {
-                
-            }
-            let data = await response.json()
-            if (data.error)
-            setMovies(data)
-        }
-        catch(error) {
-            console.log(error)
-            if (error.message === "expired token") {
-                console.log(error.message)
+            if (response.status === 401) {
                 toggleRefresh()
                     .then(token => setJwtToken(token))
                     .catch(() => {
                         setJwtToken("")
                         navigate("/login")
                     })
+            } else if (response.status === 200) {
+                let data = await response.json()
+                setMovies(data)
             }
-            if (jwtToken === "") {
-                navigate("/login")
-            }
+        }
+        catch(error) {
+            console.log(error)
         }
     }, [jwtToken, toggleRefresh])
 

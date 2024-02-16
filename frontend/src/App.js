@@ -41,9 +41,6 @@ function App() {
           resolve(data.access_token)
         })
         .catch(error => {
-          // if (error.message !== "Unexpected end of JSON input") {
-          //   console.log(error)
-          // }
           reject(error)
         })
       })
