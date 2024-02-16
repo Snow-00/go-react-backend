@@ -27,7 +27,7 @@ func (app *Application) AuthRequired() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		_, _, err := app.Auth.GetTokenAndVerify(c)
 		if err != nil {
-			c.AbortWithStatus(http.StatusUnauthorized)
+			c.AbortWithError(http.StatusUnauthorized, err)
 			return
 		}
 

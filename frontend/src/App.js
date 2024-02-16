@@ -50,10 +50,16 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log("useEffect run")
     toggleRefresh()
-      .then(token => setJwtToken(token))
-      .catch(error => console.log(error))
+      .then(token => {
+        setJwtToken(token)
+        console.log("from use effect")
+      })
+      .catch(error => {
+        if (error.message !== "Unexpected end of JSON input") {
+          console.log(error)
+        }
+      })
   }, [toggleRefresh])
 
   return (

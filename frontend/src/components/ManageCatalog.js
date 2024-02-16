@@ -8,21 +8,41 @@ const ManageCatalog = () => {
     const { toggleRefresh } = useOutletContext()
     const navigate = useNavigate()
 
-    const fetchCatalog = useCallback((token) => {
+    const fetchCatalog = useCallback(async () => {
         const headers = new Headers()
         headers.append("Content-Type", "application/json")
-        headers.append("Authorization", "Bearer " + token)
+        headers.append("Authorization", "Bearer " + jwtToken)
 
         const requestOptions = {
             method: "GET",
             headers: headers,
         }
 
-        fetch(`/admin/movies`, requestOptions)
-            .then(response => response.json())
-            .then(data => setMovies(data))
-            .catch(error => console.log(error))
-    }, [])
+        try {
+            let response = await fetch(`/admin/movies`, requestOptions)
+            if (response.status !== 401) {
+                
+            }
+            let data = await response.json()
+            if (data.error)
+            setMovies(data)
+        }
+        catch(error) {
+            console.log(error)
+            if (error.message === "expired token") {
+                console.log(error.message)
+                toggleRefresh()
+                    .then(token => setJwtToken(token))
+                    .catch(() => {
+                        setJwtToken("")
+                        navigate("/login")
+                    })
+            }
+            if (jwtToken === "") {
+                navigate("/login")
+            }
+        }
+    }, [jwtToken, toggleRefresh])
 
     const checkJwt = useCallback(async () => {
         try {
@@ -30,15 +50,14 @@ const ManageCatalog = () => {
             setJwtToken(token, fetchCatalog(token))
         }
         catch(error) {
-            console.log(error)
             setJwtToken("")
             navigate("/login")
         }
     }, [toggleRefresh])
     
     useEffect(() => {
-        checkJwt()
-    }, [checkJwt])
+        fetchCatalog()
+    }, [fetchCatalog])
 
     return (
         <div>
