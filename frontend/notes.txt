@@ -95,6 +95,11 @@ in react the default for running func is synchronous (not sequential), so if u w
 https://www.youtube.com/watch?v=9j1dZwFEJ-c
 https://www.youtube.com/watch?v=li7FzDHYZpc
 
+to pass a value as property do it like this
+title={"title"}
+
+Text in a <pre> element is displayed in a fixed-width font, and the text preserves both spaces and line breaks.
+https://www.w3schools.com/tags/tag_pre.asp
 
 =============================================================================================================
 

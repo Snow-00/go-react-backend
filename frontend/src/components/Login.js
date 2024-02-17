@@ -9,7 +9,6 @@ const Login = () => {
     const { setJwtToken } = useOutletContext()
     const { setAlertClassName } = useOutletContext()
     const { setAlertMessage } = useOutletContext()
-    const { toggleRefresh } = useOutletContext()
 
     const navigate = useNavigate()
 
