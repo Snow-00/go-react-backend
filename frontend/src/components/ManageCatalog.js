@@ -36,17 +36,6 @@ const ManageCatalog = () => {
             console.log(error)
         }
     }, [jwtToken, toggleRefresh])
-
-    const checkJwt = useCallback(async () => {
-        try {
-            let token = await toggleRefresh()
-            setJwtToken(token, fetchCatalog(token))
-        }
-        catch(error) {
-            setJwtToken("")
-            navigate("/login")
-        }
-    }, [toggleRefresh])
     
     useEffect(() => {
         fetchCatalog()
