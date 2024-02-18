@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/Snow-00/go-react-movies-backend/internal/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -142,4 +143,44 @@ func (app *Application) MovieCatalog(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, movies)
+}
+
+func (app *Application) GetMovie(c *gin.Context) {
+	movieID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	movie, err := app.DB.OneMovie(movieID)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, movie)
+}
+
+func (app *Application) MovieForEdit(c *gin.Context) {
+	movieID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	movie, genres, err := app.DB.OneMovieForEdit(movieID)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	payload := struct {
+		Movie  *models.Movie   `json:"movie"`
+		Genres []*models.Genre `json:"genres"`
+	}{
+		movie,
+		genres,
+	}
+
+	c.JSON(http.StatusOK, payload)
 }
