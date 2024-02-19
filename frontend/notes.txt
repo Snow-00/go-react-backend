@@ -104,6 +104,25 @@ https://www.w3schools.com/tags/tag_pre.asp
 object.values() method is used to return an array whose elements are the enumerable property values found on the object
 https://www.geeksforgeeks.org/javascript-object-values-method/
 
+append is exclusive for headers, push is to append data to a general array
+
+dalam React, Anda harus menghindari perubahan langsung pada state, dan sebaiknya membuat salinan baru untuk diubah.
+
+this means we spred the movie array value then we change genres and genres_array w/ new values
+{
+    ...movie,
+    genres: checks,
+    genres_array: [],
+}
+
+using previous value from state
+prevValue => ({
+    ...prevValue,
+    genres: checks,
+    genres_array: [],
+})
+
+
 =============================================================================================================
 
 JUST FOR LEARNING
