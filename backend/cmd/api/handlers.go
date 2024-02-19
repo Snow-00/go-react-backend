@@ -184,3 +184,13 @@ func (app *Application) MovieForEdit(c *gin.Context) {
 
 	c.JSON(http.StatusOK, payload)
 }
+
+func (app *Application) AllGenres(c *gin.Context) {
+	genres, err := app.DB.AllGenres()
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, genres)
+}

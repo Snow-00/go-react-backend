@@ -21,6 +21,8 @@ func (app *Application) Routes() *gin.Engine {
 	r.GET("/movies", app.AllMovies)
 	r.GET("/movies/:id", app.GetMovie)
 
+	r.GET("/genres", app.AllGenres)
+
 	authorized := r.Group("/admin", app.AuthRequired())
 	{
 		authorized.GET("/movies", app.MovieCatalog)
