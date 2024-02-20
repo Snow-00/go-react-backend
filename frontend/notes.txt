@@ -122,6 +122,8 @@ prevValue => ({
     genres_array: [],
 })
 
+event.target.value
+this returns string type data
 
 =============================================================================================================
 

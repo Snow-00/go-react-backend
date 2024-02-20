@@ -108,6 +108,24 @@ const EditMovie = () => {
         console.log("handleCheck:", event.target.value)
         console.log("checked is", event.target.checked)
         console.log("position is", position)
+
+        let tmpArr = movie.genres
+        tmpArr[position].checked = !tmpArr[position].checked  //reverse the value
+
+        let valueInt = parseInt(event.target.value, 10)
+
+        let tmpIDs = movie.genres_array
+        if (!event.target.checked) {
+            tmpIDs.splice(tmpIDs.indexOf(valueInt), 1)
+        } else {
+            tmpIDs.push(valueInt)
+        }
+
+        setMovie({
+            ...movie,
+            genres: tmpArr,
+            genres_array: tmpIDs,
+        })
     }
     
     return (
