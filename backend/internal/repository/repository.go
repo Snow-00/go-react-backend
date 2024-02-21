@@ -15,4 +15,5 @@ type DatabaseRepo interface {
 	OneMovie(id int) (*models.Movie, error)                         // for the public to see
 	OneMovieForEdit(id int) (*models.Movie, []*models.Genre, error) // for edit purpose / admin only
 	AllGenres() ([]*models.Genre, error)
+	InsertMovie(movie models.Movie) (int, error)
 }
