@@ -9,8 +9,8 @@ const EditMovie = () => {
     const navigate = useNavigate()
     const { jwtToken } = useOutletContext()
 
-    const [error, setError] = useState(null)
-    const [errors, setErrors] = useState([])
+    const [err, setErr] = useState(null)
+    const [errs, setErrs] = useState([])
 
     const mpaaOptions = [
         {id: "G", value: "G"},
@@ -22,7 +22,7 @@ const EditMovie = () => {
     ]
 
     const hasError = (key) => {
-        return errors.indexOf(key) !== -1
+        return errs.indexOf(key) !== -1
     }
 
     const [movie, setMovie] = useState({
@@ -92,6 +92,27 @@ const EditMovie = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        let errors = []
+        let required = [
+            { field: movie.title, name: "title" },
+            { field: movie.release_date, name: "release_date" },
+            { field: movie.runtime, name: "runtime" },
+            { field: movie.description, name: "description" },
+            { field: movie.mpaa_rating, name: "mpaa_rating" },
+        ]
+
+        required.forEach(obj => {
+            if (obj.field === "") {
+                errors.push(obj.name)
+            }
+        })
+
+        setErrs(errors)
+
+        if (errors.length > 0) {
+            return false
+        }
     }
 
     const handleChange = () => (event) => {
@@ -143,7 +164,7 @@ const EditMovie = () => {
                     name={"title"}
                     value={movie.title}
                     onChange={handleChange("title")}
-                    errorDiv={hasError("title") ? "tex-danger" : "d-none"}
+                    errorDiv={hasError("title") ? "text-danger" : "d-none"}
                     errorMsg={"Please enter a title"}
                 />
 
@@ -207,6 +228,10 @@ const EditMovie = () => {
                         ))}
                     </>
                 }
+
+                <hr />
+
+                <button className="btn btn-primary">Save</button>
             </form>
         </div>
     )
