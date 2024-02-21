@@ -68,3 +68,7 @@ omitempty in json tag means if its empty then it will be omitted
 sql.LastInsertId() is not supported for postgresql, instead use something like this
 sqlStatement := `... RETURNING id`
 err = db.QueryRow(sqlStatement, 30, "jon@calhoun.io", "Jonathan", "Calhoun").Scan(&id)
+
+tmdb account
+email jexemap806@gexige.com
+pass jexemap806
