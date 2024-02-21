@@ -125,6 +125,8 @@ prevValue => ({
 event.target.value
 this returns string type data
 
+alert() is to make pop up
+
 =============================================================================================================
 
 JUST FOR LEARNING
