@@ -194,3 +194,19 @@ func (app *Application) AllGenres(c *gin.Context) {
 
 	c.JSON(http.StatusOK, genres)
 }
+
+func (app *Application) InsertMovie(c *gin.Context) {
+	var movie models.Movie
+
+	err := c.BindJSON(&movie)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	// try to get image
+
+	// now handle genres
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "movie updated"})
+}
