@@ -127,6 +127,9 @@ this returns string type data
 
 alert() is to make pop up
 
+The toISOString() method of Date instances returns a string representing this date in the date time string format
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
+
 =============================================================================================================
 
 JUST FOR LEARNING
