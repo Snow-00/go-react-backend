@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -211,7 +210,11 @@ func (app *Application) InsertMovie(c *gin.Context) {
 	}
 
 	// try to get image
-	movie = app.GetPoster(movie)
+	movie, err = app.GetPoster(movie)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
 
 	movie.CreatedAt = time.Now()
 	movie.UpdatedAt = time.Now()
@@ -232,12 +235,12 @@ func (app *Application) InsertMovie(c *gin.Context) {
 	c.JSON(http.StatusAccepted, gin.H{"message": "movie updated"})
 }
 
-func (app *Application) GetPoster(movie models.Movie) models.Movie {
+func (app *Application) GetPoster(movie models.Movie) (models.Movie, error) {
 	type TheMovieDB struct {
 		Page    int `json:"page"`
 		Results []struct {
 			PosterPath string `json:"poster_path"`
-		} `json:"result"`
+		} `json:"results"`
 		TotalPages int `json:"total_pages"`
 	}
 
@@ -246,8 +249,7 @@ func (app *Application) GetPoster(movie models.Movie) models.Movie {
 
 	req, err := http.NewRequest("GET", apiUrl+"&query="+url.QueryEscape(movie.Title), nil)
 	if err != nil {
-		log.Println(err)
-		return movie
+		return movie, err
 	}
 
 	req.Header.Add("Accept", "application/json")
@@ -255,24 +257,26 @@ func (app *Application) GetPoster(movie models.Movie) models.Movie {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Println(err)
-		return movie
+		return movie, err
 	}
 	defer resp.Body.Close()
 
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Println(err)
-		return movie
+		// log.Println(err)
+		return movie, err
 	}
 
 	var responseObject TheMovieDB
 
-	json.Unmarshal(bodyBytes, &responseObject)
+	err = json.Unmarshal(bodyBytes, &responseObject)
+	if err != nil {
+		return movie, err
+	}
 
 	if len(responseObject.Results) > 0 {
 		movie.Image = responseObject.Results[0].PosterPath
 	}
 
-	return movie
+	return movie, nil
 }

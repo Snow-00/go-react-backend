@@ -124,6 +124,43 @@ const EditMovie = () => {
         if (errors.length > 0) {
             return false
         }
+
+        // passed validation, then save changes
+        const headers = new Headers()
+        headers.append("Content-Type", "application/json")
+        headers.append("Authorization", "Bearer " + jwtToken)
+
+        // assume we r adding new movie
+        let method = "POST"
+
+        if (movie.id > 0) {
+            method = "PATCH"
+        }
+
+        const requestBody = movie
+        // convert values in JSON 4 release_date (to date)
+        // runtime to int
+
+        requestBody.release_date = new Date(movie.release_date)
+        requestBody.runtime = parseInt(movie.runtime, 10)
+
+        let requestOptions = {
+            body: JSON.stringify(requestBody),
+            method: method,
+            headers: headers,
+            credentials: "include",
+        }
+
+        fetch(`/admin/movies/${movie.id}`, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.log(data.message)
+                } else {
+                    navigate("/manage-catalog")
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     const handleChange = () => (event) => {
