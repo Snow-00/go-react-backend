@@ -234,7 +234,10 @@ const EditMovie = () => {
         })
     }
     
-    return (
+    if (err !== null) {
+        return <div>Error: {err.message}</div>
+    } else {
+        return (
         <div>
             <h2>Add/Edit Movie</h2>
             <hr />
@@ -320,7 +323,7 @@ const EditMovie = () => {
                 <button className="btn btn-primary">Save</button>
             </form>
         </div>
-    )
+    )}
 }
 
 export default EditMovie

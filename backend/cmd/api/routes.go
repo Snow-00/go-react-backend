@@ -28,6 +28,7 @@ func (app *Application) Routes() *gin.Engine {
 		authorized.GET("/movies", app.MovieCatalog)
 		authorized.GET("/movies/:id", app.MovieForEdit)
 		authorized.POST("/movies/0", app.InsertMovie)
+		authorized.PATCH("/movies/:id", app.UpdateMovie)
 	}
 
 	return r

@@ -280,3 +280,41 @@ func (app *Application) GetPoster(movie models.Movie) (models.Movie, error) {
 
 	return movie, nil
 }
+
+func (app *Application) UpdateMovie(c *gin.Context) {
+	var payload models.Movie
+
+	err := c.BindJSON(&payload)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	movie, err := app.DB.OneMovie(payload.ID)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	// this method quite roundabout
+	movie.Title = payload.Title
+	movie.ReleaseDate = payload.ReleaseDate
+	movie.Description = payload.Description
+	movie.MPAARating = payload.MPAARating
+	movie.RunTime = payload.RunTime
+	movie.UpdatedAt = time.Now()
+
+	err = app.DB.UpdateMovie(*movie)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	err = app.DB.UpdateMovieGenres(movie.ID, payload.GenresArray)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "movie updated"})
+}
