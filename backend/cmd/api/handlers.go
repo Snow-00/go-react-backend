@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"time"
 
 	"github.com/Snow-00/go-react-movies-backend/internal/models"
 	"github.com/gin-gonic/gin"
@@ -210,8 +211,23 @@ func (app *Application) InsertMovie(c *gin.Context) {
 	}
 
 	// try to get image
+	movie = app.GetPoster(movie)
+
+	movie.CreatedAt = time.Now()
+	movie.UpdatedAt = time.Now()
+
+	newID, err := app.DB.InsertMovie(movie)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
 
 	// now handle genres
+	err = app.DB.UpdateMovieGenres(newID, movie.GenresArray)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
 
 	c.JSON(http.StatusAccepted, gin.H{"message": "movie updated"})
 }
