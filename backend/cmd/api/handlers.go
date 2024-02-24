@@ -318,3 +318,19 @@ func (app *Application) UpdateMovie(c *gin.Context) {
 
 	c.JSON(http.StatusAccepted, gin.H{"message": "movie updated"})
 }
+
+func (app *Application) DeleteMovie(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	err = app.DB.DeleteMovie(id)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "movie deleted"})
+}
