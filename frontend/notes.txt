@@ -132,6 +132,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 passing prop to react router dom is by using state={{...}}
 
+to get props from state in Link (react router dom), use the useLocation hook
+
 =============================================================================================================
 
 JUST FOR LEARNING
