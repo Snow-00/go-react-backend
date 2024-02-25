@@ -74,3 +74,8 @@ email jexemap806@gexige.com
 pass jexemap806
 
 in gin golang we cant make a request http to external server, we hv to use http.Client
+
+using 
+where = fmt.Sprintf("WHERE id IN (SELECT movie_id FROM movies_genres WHERE genre_id = %d)", genreID[0])
+in AllMovies(genreID ...int)
+is still safe n easier becoz we get the input from param
