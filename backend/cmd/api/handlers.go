@@ -334,3 +334,19 @@ func (app *Application) DeleteMovie(c *gin.Context) {
 
 	c.JSON(http.StatusAccepted, gin.H{"message": "movie deleted"})
 }
+
+func (app *Application) AllMoviesByGenre(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	movies, err := app.DB.AllMovies(id)
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, movies)
+}
