@@ -1,12 +1,14 @@
 package graph
 
 import (
+	"errors"
 	"strings"
 
 	"github.com/Snow-00/go-react-movies-backend/internal/models"
 	"github.com/graphql-go/graphql"
 )
 
+// Graph is the type of our graphql operation
 type Graph struct {
 	Movies      []*models.Movie
 	QueryString string
@@ -15,8 +17,10 @@ type Graph struct {
 	MovieType   *graphql.Object
 }
 
+// new is the factory method to create a new instance of the graph type
 func New(movies []*models.Movie) *Graph {
-	// object definition
+
+	// object definition of movie
 	movieType := graphql.NewObject(
 		graphql.ObjectConfig{
 			Name: "Movie",
@@ -111,4 +115,21 @@ func New(movies []*models.Movie) *Graph {
 		Fields:    fields,
 		MovieType: movieType,
 	}
+}
+
+func (g *Graph) Query() (*graphql.Result, error) {
+	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: g.Fields}
+	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
+	schema, err := graphql.NewSchema(schemaConfig)
+	if err != nil {
+		return nil, err
+	}
+
+	params := graphql.Params{Schema: schema, RequestString: g.QueryString}
+	resp := graphql.Do(params)
+	if len(resp.Errors) > 0 {
+		return nil, errors.New("error exec query")
+	}
+
+	return resp, nil
 }
