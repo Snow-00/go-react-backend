@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/Snow-00/go-react-movies-backend/internal/graph"
 	"github.com/Snow-00/go-react-movies-backend/internal/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -349,4 +350,30 @@ func (app *Application) AllMoviesByGenre(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, movies)
+}
+
+func (app *Application) MoviesGraphQL(c *gin.Context) {
+	// we need to populate graph type w/ movies
+	movies, _ := app.DB.AllMovies()
+
+	// get the query from the request
+	q, _ := io.ReadAll(c.Request.Body)
+	query := string(q)
+
+	// crete a new var of type *graph.Graph
+	g := graph.New(movies)
+
+	// set the query string on the var
+	g.QueryString = query
+
+	// performs the query
+	resp, err := g.Query()
+	if err != nil {
+		app.ErrorJSON(c, err)
+		return
+	}
+
+	// send the response
+	j, _ := json.MarshalIndent(resp, "", "\t")
+	c.JSON(http.StatusOK, j)
 }
