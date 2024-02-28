@@ -24,7 +24,7 @@ func (app *Application) Routes() *gin.Engine {
 	r.GET("/genres", app.AllGenres)
 	r.GET("/movies/genres/:id", app.AllMoviesByGenre)
 
-	r.GET("/graph", app.MoviesGraphQL)
+	r.POST("/graph", app.MoviesGraphQL)
 
 	authorized := r.Group("/admin", app.AuthRequired())
 	{

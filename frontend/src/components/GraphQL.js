@@ -59,7 +59,7 @@ const GraphQL = () => {
                     title={"Search"}
                     type={"search"}
                     name={"search"}
-                    className={form-control}
+                    className={"form-control"}
                     value={searchTerm}
                     onChange={handleChange} />
             </form>
@@ -82,6 +82,8 @@ const GraphQL = () => {
                                         {m.title}
                                     </Link>
                                 </td>
+                                <td>{new Date(m.release_date).toLocaleDateString()}</td>
+                                <td>{m.mpaa_rating}</td>
                             </tr>
                         ))}
                     </tbody>
