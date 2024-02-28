@@ -74,3 +74,5 @@ email jexemap806@gexige.com
 pass jexemap806
 
 in gin golang we cant make a request http to external server, we hv to use http.Client
+
+in graphql, if u want to not list the column inn the get data, then simply don't specify it at the object defining
