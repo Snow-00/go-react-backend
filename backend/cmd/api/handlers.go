@@ -374,8 +374,5 @@ func (app *Application) MoviesGraphQL(c *gin.Context) {
 	}
 
 	// send the response
-	j, _ := json.MarshalIndent(resp, "", "\t")
-	c.Header("Content-Type", "application/json")
-	c.Writer.WriteHeader(http.StatusOK)
-	c.Writer.Write(j)
+	c.JSON(http.StatusOK, resp)
 }
