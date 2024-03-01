@@ -36,6 +36,7 @@ const GraphQL = () => {
                 let theList = Object.values(response.data.search)
                 setMovies(theList)
             })
+            .catch(err => console.log(err))
     }
 
     const handleChange = (event) => {
