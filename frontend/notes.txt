@@ -84,8 +84,6 @@ https://stackoverflow.com/questions/1234343/why-are-empty-catch-blocks-a-bad-ide
 
 to use proxy just simply add this in package.json
 "proxy": "http://localhost:8080",
-OR
-"proxy": "https://supreme-halibut-v664446pgxqxhwxvr-8080.app.github.dev"
 https://blog.logrocket.com/why-you-should-use-proxy-server-create-react-app/
 
 if theres an error in proxy try this solution first
@@ -133,6 +131,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 passing prop to react router dom is by using state={{...}}
 
 to get props from state in Link (react router dom), use the useLocation hook
+
+in .env file frontend
+REACT_APP_BACKEND=https://api.learn-code.ca
 
 =============================================================================================================
 

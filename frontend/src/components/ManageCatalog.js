@@ -19,7 +19,7 @@ const ManageCatalog = () => {
         }
 
         try {
-            let response = await fetch(`/admin/movies`, requestOptions)
+            let response = await fetch(`${process.env.REACT_APP_BACKEND}/admin/movies`, requestOptions)
             if (response.status === 401) {
                 toggleRefresh()
                     .then(token => setJwtToken(token))

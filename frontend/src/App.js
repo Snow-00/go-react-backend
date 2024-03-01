@@ -16,7 +16,7 @@ function App() {
     }
 
     // here we dont need .then becos we just want to delete the cookie
-    fetch(`/logout`, requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND}/logout`, requestOptions)
       .catch(error => console.log("error logging out", error))
       .finally(() => {
         setJwtToken("")
@@ -31,7 +31,7 @@ function App() {
         credentials: "include",
       }
 
-      fetch(`/refresh`, requestOptions)
+      fetch(`${process.env.REACT_APP_BACKEND}/refresh`, requestOptions)
         .then(response => response.json())
         .then(data => {
           if (data.error) {
