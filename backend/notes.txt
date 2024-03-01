@@ -81,3 +81,6 @@ in AllMovies(genreID ...int)
 is still safe n easier becoz we get the input from param
 
 in graphql, if u want to not list the column inn the get data, then simply don't specify it at the object defining
+
+to modify the go build command to match the server spec n name u want, use this
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o gomovies ./cmd/api/

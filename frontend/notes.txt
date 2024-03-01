@@ -135,6 +135,9 @@ to get props from state in Link (react router dom), use the useLocation hook
 in .env file frontend
 REACT_APP_BACKEND=https://api.learn-code.ca
 
+to build use 
+npm run build
+
 =============================================================================================================
 
 JUST FOR LEARNING
