@@ -4,12 +4,13 @@ import (
 	"flag"
 	"log"
 	"time"
+	"os"
 
 	"github.com/Snow-00/go-react-movies-backend/internal/repository"
 	"github.com/Snow-00/go-react-movies-backend/internal/repository/dbrepo"
 )
 
-const PORT = "8080"
+const PORT = os.Getenv("PORT")
 
 type Application struct {
 	Domain       string
@@ -59,5 +60,5 @@ func main() {
 	}
 
 	// start web server
-	app.Routes().Run(":" + PORT)
+	app.Routes().Run("0.0.0.0:" + PORT)
 }
