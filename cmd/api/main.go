@@ -30,7 +30,7 @@ func main() {
 	var app Application
 
 	// read from command line, think still better .env
-	flag.StringVar(&app.DSN, "dsn", "host=viaduct.proxy.rlwy.net port=34159 user=postgres password=mNwgjZHHkhwJKAZDTkfMoPClLyFACHtJ dbname=railway sslmode=disable timezone=UTC connect_timeout=5", "Postgres connection string") // timeout 5 secs
+	flag.StringVar(&app.DSN, "dsn", "host=viaduct.proxy.rlwy.net port=38590 user=postgres password=ALRuvtwNWlomfVgVIYmqIrhsmezTmGxX dbname=railway sslmode=disable timezone=UTC connect_timeout=5", "Postgres connection string") // timeout 5 secs
 	flag.StringVar(&app.JWTSecret, "jwt-secret", "verysecret", "Signing secret")
 	flag.StringVar(&app.JWTIssuer, "jwt-issuer", "go-react-frontend.vercel.app", "Signing issuer")
 	flag.StringVar(&app.JWTAudience, "jwt-audience", "go-react-frontend.vercel.app", "Signing audience")
