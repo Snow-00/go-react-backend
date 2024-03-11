@@ -28,13 +28,13 @@ func main() {
 	var app Application
 
 	// read from command line, think still better .env
-	flag.StringVar(&app.DSN, "dsn", "host=localhost port=5432 user=postgres password=postgres dbname=movies sslmode=disable timezone=UTC connect_timeout=5", "Postgres connection string") // timeout 5 secs
+	flag.StringVar(&app.DSN, "dsn", "host=viaduct.proxy.rlwy.net port=34159 user=postgres password=mNwgjZHHkhwJKAZDTkfMoPClLyFACHtJ dbname=railway sslmode=disable timezone=UTC connect_timeout=5", "Postgres connection string") // timeout 5 secs
 	flag.StringVar(&app.JWTSecret, "jwt-secret", "verysecret", "Signing secret")
-	flag.StringVar(&app.JWTIssuer, "jwt-issuer", "example.com", "Signing issuer")
-	flag.StringVar(&app.JWTAudience, "jwt-audience", "example.com", "Signing audience")
+	flag.StringVar(&app.JWTIssuer, "jwt-issuer", "go-react-frontend.vercel.app", "Signing issuer")
+	flag.StringVar(&app.JWTAudience, "jwt-audience", "go-react-frontend.vercel.app", "Signing audience")
 	// flag.StringVar(&app.CookieDomain, "cookie-domain", "127.0.0.1", "Cookie domain")
-	flag.StringVar(&app.CookieDomain, "cookie-domain", "localhost", "Cookie domain")
-	flag.StringVar(&app.Domain, "domain", "example.com", "Domain")
+	flag.StringVar(&app.CookieDomain, "cookie-domain", "", "Cookie domain")
+	flag.StringVar(&app.Domain, "domain", "go-react-backend-production.up.railway.app", "Domain")
 	flag.StringVar(&app.APIKey, "api-key", "8561321331c4cb04c25726ac2e38328a", "api key")
 	flag.Parse()
 
