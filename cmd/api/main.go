@@ -10,8 +10,6 @@ import (
 	"github.com/Snow-00/go-react-movies-backend/internal/repository/dbrepo"
 )
 
-const PORT = os.Getenv("PORT")
-
 type Application struct {
 	Domain       string
 	DSN          string // data source name
@@ -25,6 +23,9 @@ type Application struct {
 }
 
 func main() {
+	// get port 
+	PORT := os.Getenv("PORT")
+	
 	// set app config
 	var app Application
 
